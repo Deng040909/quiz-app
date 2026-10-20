@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz 1</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Switch light/dark mode">
+  <span id="theme-icon">🌙</span>
+</button>
+
+
+<div class="screen active" id="screen-welcome">
+  <h1>Welcome!</h1>
+  <p class="subtitle">20 questions covering HTML, CSS, and JavaScript fundamentals</p>
+
+  <ul class="info-list">
+    <li>Questions 1–10: Multiple choice</li>
+    <li>Questions 11–20: Fill in the blank / identification</li>
+    <li>20 questions total — 1 point each</li>
+    <li>Use <kbd>&#8592;</kbd> / <kbd>&#8594;</kbd> arrow keys to move between questions</li>
+  </ul>
+
+  <p class="subtitle" style="margin-bottom:14px;">Choose your mode:</p>
+  <div class="option-group">
+    <div class="toggle-card selected" id="mode-notimer" onclick="selectMode(false)">
+      <span class="emoji">🧘</span>
+      <b>No Timer</b>
+      <span class="desc">Answer at your own pace</span>
+    </div>
+    <div class="toggle-card" id="mode-timer" onclick="selectMode(true)">
+      <span class="emoji">⏱️</span>
+      <b>30s per Question</b>
+      <span class="desc">Auto-advances when time's up</span>
+    </div>
+  </div>
+
+  <button class="primary" onclick="startQuiz()">Start Quiz</button>
+</div>
+
+<div class="screen" id="screen-quiz">
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span id="q-counter">Question 1 / 20</span>
+      <span id="timer-display"></span>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill"></div></div>
+  </div>
+
+  <span class="qtype" id="q-type">Multiple Choice</span>
+  <div class="question-text" id="q-text"></div>
+
+  <div class="choices" id="q-choices"></div>
+  <input type="text" class="blank-input" id="q-blank" placeholder="Type your answer here..." style="display:none;" autocomplete="off">
+
+  <div class="nav-row">
+    <button class="nav-btn" id="btn-prev" onclick="goPrev()">&#8592; Previous</button>
+    <button class="nav-btn" id="btn-next" onclick="goNext()">Next &#8594;</button>
+  </div>
+  <p class="nav-hint">Press <kbd>&#8594;</kbd> for next &nbsp;•&nbsp; <kbd>&#8592;</kbd> for previous</p>
+</div>
+
+<div class="screen" id="screen-results">
+  <h1>Quiz Complete!</h1>
+  <div class="score-circle" id="score-circle" style="--pct:0;">
+    <div class="big" id="score-big">0/20</div>
+    <div class="small">SCORE</div>
+  </div>
+  <p class="remark" id="remark"></p>
+
+  <div class="key-row" style="margin-top:8px;">
+    <div class="key-btn" onclick="showAnswerKey()"><b><kbd>A</kbd> Answer Key</b><span>See correct answers</span></div>
+    <div class="key-btn" onclick="retryQuiz()"><b><kbd>R</kbd> Retry</b><span>Try the quiz again</span></div>
+    <div class="key-btn" onclick="finishDone()"><b><kbd>D</kbd> Done</b><span>Finish & close</span></div>
+  </div>
+  <p class="nav-hint">Press the highlighted key on your keyboard, or click a card above.</p>
+</div>
+
+<div class="screen" id="screen-answerkey">
+  <h1>Answer Key</h1>
+  <div class="ak-list" id="ak-list"></div>
+  <div class="key-row">
+    <div class="key-btn" onclick="backToResults()"><b><kbd>B</kbd> Back</b><span>Return to results</span></div>
+    <div class="key-btn" onclick="retryQuiz()"><b><kbd>R</kbd> Retry</b><span>Try the quiz again</span></div>
+    <div class="key-btn" onclick="finishDone()"><b><kbd>D</kbd> Done</b><span>Finish & close</span></div>
+  </div>
+</div>
+
+<div class="screen" id="screen-done">
+  <div class="goodbye">
+    <div class="emoji">🎓</div>
+    <h1>Thanks for taking the quiz!</h1>
+    <p class="subtitle">You may now close this tab/window.</p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
